@@ -5,33 +5,8 @@ env:
   browser: true
   node: true
 
-ecmaFeatures:
-  arrowFunctions: true
-  binaryLiterals: false
-  blockBindings: true
-  classes: true
-  defaultParams: true
-  destructuring: true
-  forOf: true
-  generators: false
-  modules: true
-  objectLiteralComputedProperties: true
-  objectLiteralDuplicateProperties: false
-  objectLiteralShorthandMethods: true
-  objectLiteralShorthandProperties: true
-  octalLiterals: false
-  regexUFlag: true
-  regexYFlag: true
-  restParams: true
-  spread: true
-  superInFunctions: false
-  templateStrings: true
-  unicodeCodePointEscapes: false
-  globalReturn: false
-  jsx: true
-
 rules:
-  ### General rules
+  ## General rules
   comma-dangle: 0
   no-console: 0
   no-debugger: 0 #In the future set to 2 to do not allow debugger;
@@ -186,3 +161,29 @@ rules:
   prefer-spread: 2
   prefer-template: 2
   require-yield: 2
+
+## is still required for ESLint to work properly with features not in ECMAScript 5 by default
+ecmaFeatures:
+  arrowFunctions: true
+  binaryLiterals: false
+  blockBindings: true
+  classes: true
+  defaultParams: true
+  destructuring: true
+  forOf: true
+  generators: false
+  modules: true
+  objectLiteralComputedProperties: true
+  objectLiteralDuplicateProperties: false
+  objectLiteralShorthandMethods: true
+  objectLiteralShorthandProperties: true
+  octalLiterals: false
+  regexUFlag: true
+  regexYFlag: true
+  restParams: true
+  spread: true
+  superInFunctions: false
+  templateStrings: true
+  unicodeCodePointEscapes: false
+  globalReturn: false
+  jsx: true
