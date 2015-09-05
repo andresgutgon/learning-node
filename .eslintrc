@@ -64,7 +64,7 @@ rules:
   no-new-wrappers: 2
   no-new: 2
   no-param-reassign: 2
-  no-process-env: 2
+  no-process-env: 0 #? I'm not sure
   no-redeclare: 2
   no-return-assign: 2
   no-script-url: 2
@@ -107,7 +107,7 @@ rules:
   consistent-this: [2, "self"]
   eol-last: 2
   id-length: 2
-  indent: [2, 2]
+  indent: 0
   key-spacing: [2, {"beforeColon": false, "afterColon": true}]
   lines-around-comment: [2, { "beforeBlockComment": true }]
   linebreak-style: 2
@@ -133,7 +133,7 @@ rules:
   quotes: [2, "single", "avoid-escape"]
   semi-spacing: [2, {"before": false, "after": true}]
   semi: [2, "always"] #Always use ; semi colons
-  sort-vars: [2, { "ignoreCase": true }]
+  sort-vars: [0, { "ignoreCase": true }]
   space-after-keywords: [2, "always"]
   space-before-blocks: 2
   space-before-blocks: 2
@@ -145,22 +145,22 @@ rules:
   wrap-regex: 2
 
   ## ECMAScript 6
-  /*arrow-parens: 2*/
-  /*arrow-spacing: 2*/
-  /*constructor-super: 2*/
-  /*generator-star-spacing: 2*/
-  /*no-class-assign: 2*/
-  /*no-const-assign: 2*/
-  /*no-dupe-class-members: 2*/
-  /*no-this-before-super: 2*/
-  /*no-var: 2*/
-  /*object-shorthand: [2, "always"]*/
-  /*prefer-arrow-callback: 2*/
-  /*prefer-const: 2*/
-  /*prefer-spread: 2*/
-  /*prefer-spread: 2*/
-  /*prefer-template: 2*/
-  /*require-yield: 2*/
+  arrow-parens: 2
+  arrow-spacing: 2
+  constructor-super: 2
+  generator-star-spacing: 2
+  no-class-assign: 2
+  no-const-assign: 2
+  no-dupe-class-members: 2
+  no-this-before-super: 2
+  no-var: 2
+  object-shorthand: [2, "always"]
+  prefer-arrow-callback: 2
+  prefer-const: 2
+  prefer-spread: 2
+  prefer-spread: 2
+  prefer-template: 2
+  require-yield: 2
 
 ## is still required for ESLint to work properly with features not in ECMAScript 5 by default
 ecmaFeatures:
