@@ -1,8 +1,9 @@
 {
-  "name": "katuma-web",
+  "name": "learning-node",
   "version": "0.0.0",
   "scripts": {
-    "start": "node ./bin/www"
+    "start_foo": "node ./bin/www"
+  , "start": "node --debug app.js"
   },
   "dependencies": {
     "body-parser": "1.13.2",

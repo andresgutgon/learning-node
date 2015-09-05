@@ -1,65 +1,45 @@
 var app
-  , bodyParser
-  , cookieParser
   , express
-  , logger
-  , path
-  , routes
-  , users;
+  , setUpMiddelwares
+  , setUpErrorsMiddelware
+  , setServerConfig
+  , port
+  , start_utils;
 
 express = require('express');
+setServerConfig = require('./config/setup')
+setUpMiddelwares = require('./middlewares')
+setUpErrorsMiddelware = require('./middlewares/errors');
+start_utils = require('./utils/start');
 app = express();
-path = require('path');
-logger = require('morgan');
-cookieParser = require('cookie-parser');
-bodyParser = require('body-parser');
-routes = require('./routes/index');
-users = require('./routes/users');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+/**
+ * Run common middelwares
+ */
+setServerConfig(app, process.env.PORT);
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+/**
+ * Run common middelwares
+ */
+setUpMiddelwares(app);
 
-app.use('/', routes);
-app.use('/users', users);
+/**
+ * API proxy routes
+ */
+app.use(require('./routes/api-proxy'));
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  var err;
+/**
+ * Run errors middelwares
+ */
+setUpErrorsMiddelware(app);
 
-  err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+app.listen(app.get('port'));
+
+app.on('listening', function () {
+  start_utils.onListening(server);
 });
 
-// error handlers
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function (err, req, res) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message
-    , error: err
-    });
-  });
-}
-// production error handler
-// no stacktraces leaked to user
-app.use(function (err, req, res) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message
-  , error: {}
-  });
-});
-
-module.exports = app;
+app.on('error', start_utils.onListeningError);
