@@ -19,9 +19,9 @@ export default (req, res, next) => {
   , AuthActions
   , cookieDomain
   , locals: {
-      jsAsset: getAsset(bundle, 'js')
-    , cssAsset: getAsset(bundle, 'css')
-    , vendorAsset: getAsset('vendor', 'js')
+      js_asset: getAsset(bundle, 'js')
+    , css_asset: getAsset(bundle, 'css')
+    , vendor_asset: getAsset('vendor', 'js')
     }
   };
 

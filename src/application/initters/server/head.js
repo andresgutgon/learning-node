@@ -13,14 +13,14 @@ export default class Head extends React.Component {
           <base href='/' />
           <meta charSet='utf-8' />
 
-          <title>{title}</title>
+          <title>Page title</title>
 
           <meta name='viewport' content='width=device-width,initial-scale=1' />
 
-          {!__DEV__ && <link rel='stylesheet' href={css_asset} />}
+          <link rel='stylesheet' href={this.props.css_asset} />
 
-          <meta name='description' content={description} />
-          <meta name='keywords' content={keywords} />
+          <meta name='description' content='Pending pass description' />
+          <meta name='keywords' content='Pending pass keywords' />
 
           <link rel='shortcut icon' href='favicon.ico' />
         </head>
