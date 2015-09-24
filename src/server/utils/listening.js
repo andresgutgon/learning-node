@@ -29,7 +29,7 @@ function onListeningError (error) {
 function onListening (server) {
   const address = server.address();
 
-  console.log(`Express server running on port ${address.port}`);
+  console.log(`🚀  Express server running on port ${address.port}`);
 }
 
 export default { onListeningError, onListening };

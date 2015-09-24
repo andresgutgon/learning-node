@@ -1,10 +1,24 @@
-export default (err, req, res, next) => {
-  res.status(err.status);
-  if (req.accepts('html')) {
-    const errPartial = parseInt(err.status, 10) >= 500 ? 500 : err.status;
+/**
+ * Get server error status.
+ * If status not present in request set 500
+ *
+ * @param {String} status
+ * @return {Integer}
+ */
+function getStatus (status) {
+  if (!status) {
+    return 500;
+  }
+  return parseInt(status, 10) >= 500 ? 500 : status;
+}
 
-    res.render(`../errors/${errPartial}`, { url: req.url, err: err.status });
+export default (error, req, res, next) => {
+  const status = getStatus(error.status);
+
+  res.status(status);
+  if (req.accepts('html')) {
+    res.render(`errors/${status}`, { url: req.url, err: status });
   } else {
-    res.sendStatus(err.status);
+    res.sendStatus(status);
   }
 };

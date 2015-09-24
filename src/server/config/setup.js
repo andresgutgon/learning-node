@@ -24,10 +24,14 @@ function normalizePort (env_port) {
  * Configure server with defaults
  *
  * @param {Object} app
- * @param {Strict} env_port
+ * @param {Object} config
  */
-export default (app, env_port) => {
-  app.set('views', path.join(__dirname, '../views'));
+export default (app, config) => {
+  global.__CLIENT__ = false;
+  global.__SERVER__ = true;
+  global.__DEV__ = config.env !== 'production';
+
+  app.set('views', path.join(__dirname, '..', 'views'));
   app.set('view engine', 'jade');
-  app.set('port', normalizePort(env_port));
+  app.set('port', normalizePort(config.app_port));
 };
