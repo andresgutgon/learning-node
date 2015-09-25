@@ -1,6 +1,11 @@
 import React from 'react';
+import { PropTypes as Type } from 'react';
 
 export default class Head extends React.Component {
+
+  static propTypes = {
+    css_asset: Type.string.isRequired
+  }
 
   constructor (props, context) {
     super(props, context);

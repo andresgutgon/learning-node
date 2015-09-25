@@ -83,7 +83,7 @@ gulp.task('bundle', (done) => {
 /* Start express servers */
 gulp.task('server', (done) => {
   const servers = config.server.paths;
-  const debug_activated = false;
+  const debug_activated = true;
   let queue;
 
   queue = servers.length;

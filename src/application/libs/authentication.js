@@ -28,10 +28,9 @@ export default class Auth {
   }
 
   login (email, token, params = {}) {
-    const cookieParams = params.sessionOnly ? this.setCookieParams() : this.setCookieParams(6);
+    const cookie_params = params.sessionOnly ? this.setCookieParams() : this.setCookieParams(6);
 
-    this.cookie.set(config.loginCookie, email, cookieParams);
-    this.cookie.set(config.tokenCookie, token, cookieParams);
+    this.cookie.set(config.session_cookie, email, cookie_params);
 
     if (params.cb) {
       params.cb();
@@ -39,8 +38,7 @@ export default class Auth {
   }
 
   logout (cb) {
-    this.cookie.set(config.loginCookie, 'bye-bye', this.setCookieParams(-1));
-    this.cookie.set(config.tokenCookie, 'bye-bye', this.setCookieParams(-1));
+    this.cookie.set(config.session_cookie, 'bye-bye', this.setCookieParams(-1));
 
     if (cb) {
       return cb();
@@ -48,18 +46,13 @@ export default class Auth {
   }
 
   getLogin () {
-    return this.cookie.get(config.loginCookie);
-  }
-
-  getToken () {
-    return this.cookie.get(config.tokenCookie);
+    return this.cookie.get(config.session_cookie);
   }
 
   getAuthHeaders () {
-    if (this.getLogin() && this.getToken()) {
+    if (this.getLogin()) {
       return {
-        [config.loginHeader]: this.getLogin()
-      , [config.tokenHeader]: this.getToken()
+        [config.user_header]: 'Pending User ID Header'
       };
     }
 
@@ -69,8 +62,6 @@ export default class Auth {
   isLoggedIn () {
     const { cookie } = this;
 
-    return (
-      !!(cookie.get(config.loginCookie) && cookie.get(config.tokenCookie))
-    );
+    return !!cookie.get(config.session_cookie);
   }
 }

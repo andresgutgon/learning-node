@@ -9,7 +9,7 @@ import jade from 'jade';
 
 import Auth from 'src/application/libs/authentication';
 import populateState from 'src/application/libs/populate-state';
-//import apiCall from 'src/application/libs/apiCall';
+import apiCall from 'src/application/libs/api-call';
 
 export default async (req, res, next, params) => {
   const combined_reducers = combineReducers(params.reducers);
@@ -17,29 +17,26 @@ export default async (req, res, next, params) => {
   const location = new Location(req.path, req.query);
   const auth_agent = new Auth(req, params.cookieDomain);
   const app_host = `${req.protocol}://${req.headers.host}`;
-  const api_host = `${req.protocol}://api.${req.headers.host}`;
 
   // If logged In we check this is true
   // and pupulate store with current_user
-  //if (auth_agent.isLoggedIn()) {
-    // FIXME: Maybe fetch here current_user data
-    //await apiCall({
-      //method: 'GET',
-      //host  : api_host,
-      //path  : '/auth/preflight',
-      //auth  : auth_agent.getAuthHeaders()
-    //})
-      //.then(response => {
-        //return (
-          //store.dispatch(params.AuthActions.setLoggedInState(auth_agenauth_agent.getLogin()))
-        //);
-      //})
-      //.catch(response => {
-        //return (
-          //response.status === 401 ? auth_agent.logout() : false
-        //);
-      //});
-  //}
+  if (auth_agent.isLoggedIn()) {
+    await apiCall({
+      method: 'GET'
+    , path: '/users/1'
+    , auth: auth_agent.getAuthHeaders()
+    })
+    .then(() => {
+      return (
+        store.dispatch(params.AuthActions.setLoggedInState(auth_agent.getLogin()))
+      );
+    })
+    .catch((response) => {
+      return (
+        response.status === 401 ? auth_agent.logout() : false
+      );
+    });
+  }
 
   const routes = params.routes({ store });
 
@@ -57,8 +54,7 @@ export default async (req, res, next, params) => {
 
     try {
       await populateState(initialState.components, {
-        api_host: api_host
-      , auth: auth_agent.getAuthHeaders()
+        auth: auth_agent.getAuthHeaders()
       , dispatch: store.dispatch
       , location: initialState.location
       , params: initialState.params
@@ -90,7 +86,7 @@ export default async (req, res, next, params) => {
       locals.chunks = serialize(chunks);
       locals.data = serialize(state);
 
-      const layout = `${process.cwd()}/src/server/react-server-layout.jade`;
+      const layout = `${process.cwd()}/src/server/views/react-server-layout.jade`;
       const html = jade.compileFile(layout, { pretty: false })(locals);
 
       res.send(html);

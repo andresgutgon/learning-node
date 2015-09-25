@@ -1,14 +1,13 @@
 import express from 'express';
 
-import users from './users';
+import Login from './login';
+import Signups from './signups';
+import DefaultCall from './default-call';
 
 const router = express.Router();
 
-/* GET home page. */
-//router.get('/', (req, res) => {
-  //res.render('index', { title: 'Express' });
-//});
-
-router.use('/users', users);
+router.use('/login', Login);
+router.use('/signups', Signups);
+router.use('/*', DefaultCall);
 
 export default router;

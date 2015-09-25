@@ -8,6 +8,7 @@ import apiProxy from './src/server/routes/api-proxy';
 
 export default (react_application_initter, config) => {
   const app = express();
+  const API_URLS = `${config.api_base_url}/*`;
 
   /**
    * Run common middelwares
@@ -22,7 +23,7 @@ export default (react_application_initter, config) => {
   /**
    * API proxy routes
    */
-  app.use(apiProxy);
+  app.use(API_URLS, apiProxy);
 
   /**
    * React application entry point on the server
