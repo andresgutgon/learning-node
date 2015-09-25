@@ -1,7 +1,7 @@
 /* eslint prefer-template: 0 */
 
-import webpackDevConfig from './webpack/config.dev';
-import webpackProdConfig from './webpack/config.dev';
+import webpackDevConfig from './webpack/dev.config';
+import webpackProdConfig from './webpack/dev.config';
 import webpackCallback from './webpack/callback';
 
 const _client = './src/client';
@@ -11,7 +11,7 @@ const _assets = `${_client}/assets`;
 export default (is_development) => {
   return {
     webpack: {
-      config: is_development ? webpackDevConfig : webpackProdConfig
+      config: is_development ? webpackDevConfig.webpack : webpackProdConfig
     , cb: webpackCallback
     }
   , server: {

@@ -6,6 +6,6 @@ import setCookieDomain from 'src/application/libs/set-cookie-domain';
 
 const cookieDomain = setCookieDomain(document.location.hostname);
 const { googleAnalyticsId } = config;
-const params = { routes, reducers, meta, cookieDomain, googleAnalyticsId };
+const params = { routes, reducers, cookieDomain, googleAnalyticsId };
 
 export default initter(params);

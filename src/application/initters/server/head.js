@@ -11,24 +11,26 @@ export default class Head extends React.Component {
     super(props, context);
   }
 
+  // FIXME: Favicon
+  //<link rel='shortcut icon' href='favicon.ico' />
+
+  // FIXME: Styles!
+  //<link rel='stylesheet' href={this.props.css_asset} />
+
+  // FIXME: Dinamyc meta data like: title, description, keywords,...
   render () {
     return (
-        <head>
+      <head>
+        <base href='/' />
+        <meta charSet='utf-8' />
 
-          <base href='/' />
-          <meta charSet='utf-8' />
+        <title>Page title</title>
 
-          <title>Page title</title>
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
 
-          <meta name='viewport' content='width=device-width,initial-scale=1' />
-
-          <link rel='stylesheet' href={this.props.css_asset} />
-
-          <meta name='description' content='Pending pass description' />
-          <meta name='keywords' content='Pending pass keywords' />
-
-          <link rel='shortcut icon' href='favicon.ico' />
-        </head>
+        <meta name='description' content='Pending pass description' />
+        <meta name='keywords' content='Pending pass keywords' />
+      </head>
     );
   }
 }
