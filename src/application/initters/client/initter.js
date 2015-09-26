@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from 'react-router';
-import BrowserHistory from 'react-router/lib/BrowserHistory';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import middleware from 'redux-thunk';
@@ -11,7 +11,7 @@ import analytics from 'src/application/libs/analytics';
 export default (params) => {
   const reducer = combineReducers(params.reducers);
   const store = applyMiddleware(middleware)(createStore)(reducer, window.__DATA__);
-  const history = new BrowserHistory();
+  const history = new createBrowserHistory();
   const authAgent = new Auth(document, params.cookieDomain);
   const routes = params.routes({ store });
   let initialRender;

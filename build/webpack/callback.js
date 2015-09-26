@@ -27,6 +27,6 @@ export default (task, err, stats) => {
     title: title
   , message: msg
   , icon: false
-  , sound: true
+  , sound: false
   });
 };
